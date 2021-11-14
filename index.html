@@ -90,7 +90,7 @@
 			<section class="add">
 				<h2 class="title">Ajouter une nouvelle ligne</h2>
 				<form class="container">
-					<select name="selectTable">
+					<select name="selectTable" id="selectTable">
 						<option value="vegetables" selected>production végétales</option>
 						<option value="animals">élévage mondiaux</option>
 					</select>
@@ -118,7 +118,37 @@
 			let animals = [];
 			let vegetables = [];
 
+			const calcTotal = () => {
+				let sumVgtCulitive = 0;
+				let sumVgtTotal = 0;
+				let sumAnmTotal = 0;
+				$.each(vegetables, (index, vegetable) => {
+					sumVgtCulitive += parseInt(vegetable.cultive);
+					sumVgtTotal += parseInt(vegetable.total);
+				});
+				$.each(animals, (index, animal) => {
+					sumAnmTotal += parseInt(animal.number);
+				});
+				$("#total-vgt td:nth-child(2)").html(sumVgtCulitive);
+				$("#total-vgt td:nth-child(3)").html(sumVgtTotal);
+				$("#total-anm td").html(sumAnmTotal);
+			};
+			calcTotal();
+
+			$("form select").change((e) => {
+				if (e.target.value === "vegetables") {
+					$(".vgt").addClass("show");
+					$(".anm").removeClass("show");
+				} else {
+					$(".vgt").removeClass("show");
+					$(".anm").addClass("show");
+				}
+			});
+
 			const createTable = () => {
+				$("#table-anm tbody").empty();
+				$("#table-vgt tbody").empty();
+
 				$.each(animals, (index, animal) => {
 					$("#table-anm tbody").append(
 						`<tr>
@@ -136,6 +166,7 @@
 						</tr>`
 					);
 				});
+				calcTotal();
 			};
 
 			const getProducts = () => {
@@ -180,22 +211,46 @@
 					},
 				});
 			};
-			const calcTotal = () => {
-				let sumVgtCulitive = 0;
-				let sumVgtTotal = 0;
-				let sumAnmTotal = 0;
-				$.each(vegetables, (index, vegetable) => {
-					sumVgtCulitive += parseInt(vegetable.cultive);
-					sumVgtTotal += parseInt(vegetable.total);
-				});
-				$.each(animals, (index, animal) => {
-					sumAnmTotal += parseInt(animal.number);
-				});
-				$("#total-vgt td:nth-child(2)").html(sumVgtCulitive);
-				$("#total-vgt td:nth-child(3)").html(sumVgtTotal);
-				$("#total-anm td").html(sumAnmTotal);
+
+			const addItem = (e) => {
+				e.preventDefault();
+				if ($("#selectTable").val() === "vegetables") {
+					const name = $("#culture").val();
+					const superficie = $("#superficie").val();
+					const total = $("#total").val();
+					vegetables.push({
+						name: name,
+						cultive: superficie,
+						total: total,
+					});
+					$("#table-vgt tbody").append(`
+						<tr>
+							<th>${name}</th>
+							<td>${superficie}</td>
+							<td>${total}</td>	
+						</tr>
+					`);
+				} else {
+					const espece = $("#espece").val();
+					const number = $("#number").val();
+					animals.push({
+						name: espece,
+						number: number,
+					});
+					$("#table-anm tbody").append(`
+						<tr>
+							<th>${espece}</th>
+							<td>${number}</td>
+						</tr>
+					`);
+				}
+				calcTotal();
 			};
-			calcTotal();
+			$("form").submit(addItem);
+
+			setInterval(function () {
+				getProducts();
+			}, 1000);
 		</script>
 	</body>
 </html>
