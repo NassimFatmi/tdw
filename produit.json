@@ -1,0 +1,70 @@
+{
+	"animals": [
+		{
+			"name": "Lapin",
+			"number": "240012"
+		},
+		{
+			"name": "Lapin",
+			"number": "240012"
+		},
+		{
+			"name": "Lapin",
+			"number": "240012"
+		},
+		{
+			"name": "Lapin",
+			"number": "240012"
+		},
+		{
+			"name": "Lapin",
+			"number": "240012"
+		},
+		{
+			"name": "Lapin",
+			"number": "240012"
+		}
+	],
+	"vegetables": [
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		},
+		{
+			"name": "vegetable",
+			"cultive": "240012",
+			"total": "566541"
+		}
+	]
+}

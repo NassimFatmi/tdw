@@ -70,9 +70,6 @@ nav > ul > li:nth-child(2):hover .type_agriculture {
 .type_agriculture li:not(:last-child) {
 	border-bottom: 1px solid rgb(0 0 0 / 20%);
 }
-main {
-	padding: 30px 0;
-}
 .container {
 	text-align: center;
 }
@@ -97,6 +94,7 @@ section div {
 }
 h2 {
 	font-size: 1.8rem;
+	text-align: center;
 }
 .tableau {
 	border: 2px dotted red;
@@ -181,14 +179,12 @@ header {
 }
 .title {
 	margin-top: 3rem;
+	text-align: center;
 }
 form {
 	display: flex;
 	flex-direction: column;
 	margin-top: 3rem;
-}
-form select {
-	padding: 0.8rem 1rem;
 }
 form .inputs {
 	display: none;
@@ -197,9 +193,15 @@ form .inputs {
 form .inputs.show {
 	display: flex;
 }
-form .inputs input {
+form .inputs input,
+form select {
 	padding: 0.8rem 1rem;
 	border-radius: 6px;
+	border: 1px solid #25a59a;
+}
+form .inputs input:focus,
+form select {
+	outline: 1px solid #25a59a;
 }
 form input[type="submit"] {
 	padding: 0.8rem 1rem;
@@ -213,4 +215,7 @@ form input[type="submit"] {
 }
 form input[type="submit"]:hover {
 	opacity: 0.8;
+}
+.add {
+	background-color: #eee;
 }
