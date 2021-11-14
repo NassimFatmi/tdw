@@ -54,11 +54,12 @@ const createTable = () => {
 	calcTotal();
 };
 
-// fonction qui ramene les produits de fichier .json
+// fonction qui get les produits de fichier .json
 const getProducts = () => {
 	$.ajax({
 		method: "GET",
 		url: "produit.json",
+		dataType: "json",
 		async: false,
 	}).done(function (data) {
 		vegetables = data.vegetables;
