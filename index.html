@@ -95,17 +95,23 @@
 						<option value="animals">élévage mondiaux</option>
 					</select>
 					<div class="inputs show vgt">
-						<input id="culture" type="text" placeholder="Culutre" />
+						<input id="culture" type="text" placeholder="Culutre" required />
 						<input
 							id="superficie"
 							type="number"
 							placeholder="Superficie cultivé"
+							required
 						/>
-						<input id="total" type="number" placeholder="Production totale" />
+						<input
+							id="total"
+							type="number"
+							placeholder="Production totale"
+							required
+						/>
 					</div>
 					<div class="inputs anm">
-						<input type="text" id="espece" placeholder="Espece" />
-						<input type="number" id="number" placeholder="Nombre" />
+						<input type="text" id="espece" placeholder="Espece" required />
+						<input type="number" id="number" placeholder="Nombre" required />
 					</div>
 					<input type="submit" value="Ajouter" />
 				</form>
@@ -114,143 +120,6 @@
 		<footer>
 			<a href="mailto:engineer@esi.dz">Contact-us</a>
 		</footer>
-		<script>
-			let animals = [];
-			let vegetables = [];
-
-			const calcTotal = () => {
-				let sumVgtCulitive = 0;
-				let sumVgtTotal = 0;
-				let sumAnmTotal = 0;
-				$.each(vegetables, (index, vegetable) => {
-					sumVgtCulitive += parseInt(vegetable.cultive);
-					sumVgtTotal += parseInt(vegetable.total);
-				});
-				$.each(animals, (index, animal) => {
-					sumAnmTotal += parseInt(animal.number);
-				});
-				$("#total-vgt td:nth-child(2)").html(sumVgtCulitive);
-				$("#total-vgt td:nth-child(3)").html(sumVgtTotal);
-				$("#total-anm td").html(sumAnmTotal);
-			};
-			calcTotal();
-
-			$("form select").change((e) => {
-				if (e.target.value === "vegetables") {
-					$(".vgt").addClass("show");
-					$(".anm").removeClass("show");
-				} else {
-					$(".vgt").removeClass("show");
-					$(".anm").addClass("show");
-				}
-			});
-
-			const createTable = () => {
-				$("#table-anm tbody").empty();
-				$("#table-vgt tbody").empty();
-
-				$.each(animals, (index, animal) => {
-					$("#table-anm tbody").append(
-						`<tr>
-							<th>${animal.name}</th>
-							<td>${animal.number}</td>
-						</tr>`
-					);
-				});
-				$.each(vegetables, (index, vegetable) => {
-					$("#table-vgt tbody").append(
-						`<tr>
-							<th>${vegetable.name}</th>
-							<td>${vegetable.cultive}</td>
-							<td>${vegetable.total}</td>
-						</tr>`
-					);
-				});
-				calcTotal();
-			};
-
-			const getProducts = () => {
-				$.ajax({
-					method: "GET",
-					url: "produit.json",
-					async: false,
-				}).done(function (data) {
-					vegetables = data.vegetables;
-					animals = data.animals;
-					createTable();
-				});
-			};
-
-			getProducts();
-
-			const addToProducts = () => {
-				// fetch("produit.html", {
-				// 	method: "POST",
-				// 	headers: {
-				// 		"Content-Type": "application/json; utf-8",
-				// 	},
-				// 	body: JSON.stringify({
-				// 		name: "Pomme de terre",
-				// 		cultive: "220417",
-				// 		total: "220417",
-				// 	}),
-				// });
-				$.ajax({
-					method: "POST",
-					url: "produit.json",
-					headers: {
-						"Content-Type": "application/json; utf-8",
-					},
-					data: {
-						name: "Pomme de terre",
-						cultive: "220417",
-						total: "220417",
-					},
-					success: (data, status, xhr) => {
-						console.log(data);
-					},
-				});
-			};
-
-			const addItem = (e) => {
-				e.preventDefault();
-				if ($("#selectTable").val() === "vegetables") {
-					const name = $("#culture").val();
-					const superficie = $("#superficie").val();
-					const total = $("#total").val();
-					vegetables.push({
-						name: name,
-						cultive: superficie,
-						total: total,
-					});
-					$("#table-vgt tbody").append(`
-						<tr>
-							<th>${name}</th>
-							<td>${superficie}</td>
-							<td>${total}</td>	
-						</tr>
-					`);
-				} else {
-					const espece = $("#espece").val();
-					const number = $("#number").val();
-					animals.push({
-						name: espece,
-						number: number,
-					});
-					$("#table-anm tbody").append(`
-						<tr>
-							<th>${espece}</th>
-							<td>${number}</td>
-						</tr>
-					`);
-				}
-				calcTotal();
-			};
-			$("form").submit(addItem);
-
-			setInterval(function () {
-				getProducts();
-			}, 1000);
-		</script>
+		<script src="index.js"></script>
 	</body>
 </html>
