@@ -4,7 +4,10 @@
 <?php
 include("navbar.php");
 ?>
-<form method="GET" class="container">
+<br>
+<h2>ADMIN</h2>
+<h2>Se connecter</h2>
+<form method="POST" class="container" action="authProvider.php">
   <div class="inputs show auth">
     <input type="text" name="user" placeholder="username">
     <br />

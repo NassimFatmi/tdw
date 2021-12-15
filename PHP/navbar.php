@@ -1,7 +1,7 @@
 <nav>
   <ul>
     <li>
-      <a class="lien" href="/tdw/php/">Accueil</a>
+      <a class="lien" href="index.php">Accueil</a>
     </li>
     <li>
       <a class="lien" href="#">Types d'agriculture</a>
